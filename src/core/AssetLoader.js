@@ -36,7 +36,9 @@ class AssetLoader {
         this.assetsLoaded += 1;
 
         const percent = (this.assetsLoaded / this.assetsToLoad) * 100;
+
         this.emitter.emit(CONSTANTS.EVENTS.ASSET_LOADED, percent );
+        if (percent === 100) this.emitter.emit(CONSTANTS.EVENTS.ASSETS_LOADED);
       }, (err) => {
         console.log(err);
       });
@@ -71,7 +73,7 @@ class AssetLoader {
 
         const percent = (this.assetsLoaded / this.assetsToLoad) * 100;
         this.emitter.emit(CONSTANTS.EVENTS.ASSET_LOADED, percent );
-        this.emitter.emit('textureLoaded', texture.id );
+        if (percent === 100) this.emitter.emit(CONSTANTS.EVENTS.ASSETS_LOADED);
       }, (err) => {
         console.log(err);
       });
@@ -107,6 +109,7 @@ class AssetLoader {
 
         const percent = (this.assetsLoaded / this.assetsToLoad) * 100;
         this.emitter.emit(CONSTANTS.EVENTS.ASSET_LOADED, percent );
+        if (percent === 100) this.emitter.emit(CONSTANTS.EVENTS.ASSETS_LOADED);
       }, (err) => {
         console.log(err);
       });
