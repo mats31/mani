@@ -68,13 +68,28 @@ export default Vue.extend({
       this.canvas.height = window.innerHeight;
       this.ctx = this.canvas.getContext('2d');
 
+      this.canvas2 = document.createElement( 'canvas' );
+      this.canvas2.width = window.innerWidth;
+      this.canvas2.height = window.innerHeight;
+      this.ctx2 = this.canvas.getContext('2d');
+
       this.$refs.container.appendChild(this.canvas);
 
       this.currentVideo = this.shortVideos[0].media;
+      this.currentVideo.onended = this.currentVideoOnEnded.bind(this);
       this.currentVideo.play();
       this.nextVideo = this.shortVideos[1].media;
-      this.nextVideo.play();
     },
+
+    // EVENTS --------------------------------------------
+
+    currentVideoOnEnded() {
+      this.ctx.clearRect( 0, 0, this.canvas.width, this.canvas.height );
+      this.maskWidth = 0;
+      this.maskHeight = 0;
+    },
+
+    // UPDATE --------------------------------------------
 
     animate() {
       raf(this.animate);
@@ -85,11 +100,15 @@ export default Vue.extend({
 
       this.ctx.save();
 
+      this.ctx.drawImage( nextVideo, 0, 0, nextVideo.videoWidth, nextVideo.videoHeight, 0, 0, canvas.width, canvas.height );
+
+      this.ctx.globalCompositeOperation = 'destination-out';
+
       this.drawMask( canvas );
 
       this.ctx.globalCompositeOperation = 'source-in';
 
-      this.ctx.drawImage( nextVideo, 0, 0, nextVideo.videoWidth, nextVideo.videoHeight, 0, 0, canvas.width, canvas.height );
+      this.ctx.drawImage( currentVideo, 0, 0, currentVideo.videoWidth, currentVideo.videoHeight, 0, 0, canvas.width, canvas.height );
 
       this.ctx.restore();
     },
