@@ -1,4 +1,3 @@
-import HomeContainer from 'containers/Home/Home';
 import CanvasComponent from 'components/Canvas/Canvas';
 import LoaderComponent from 'components/Loader/Loader';
 import template from './application.html';
@@ -15,7 +14,7 @@ export default Vue.extend({
   },
 
   mounted() {
-    console.log('yo');
+    console.log(this);
   },
 
   methods: {},
@@ -23,7 +22,6 @@ export default Vue.extend({
   components: {
     'loader-component': LoaderComponent,
     'canvas-component': CanvasComponent,
-    'home-container': HomeContainer,
   },
 
 });

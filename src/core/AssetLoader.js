@@ -32,6 +32,7 @@ class AssetLoader {
     for ( let i = 0; i < images.length; i += 1 ) {
 
       this.loadImage( images[i] ).then( ( image ) => {
+
         assets.images.push( image );
         this.assetsLoaded += 1;
 
@@ -49,6 +50,7 @@ class AssetLoader {
   loadImage(media) {
     return new Promise( ( resolve, reject ) => {
       const image = new Image();
+      image.alt = media.description;
 
       image.onload = () => {
         resolve( { id: media.id, media: image } );

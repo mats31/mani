@@ -5,6 +5,7 @@ import template from 'containers/Application/application.html';
 import AssetLoader from 'core/AssetLoader';
 import Emitter from 'core/Emitter';
 import Router from 'core/Router';
+import CONSTANTS from 'config/constants';
 import './stylesheets/main.styl';
 
 class Main {
@@ -25,7 +26,7 @@ class Main {
   setEvents() {
     this.emitter = Emitter;
 
-    window.addEventListener( 'resize', () => { this.emitter.emit('global-resize'); }, false );
+    window.addEventListener( 'resize', ( e ) => { this.emitter.emit( CONSTANTS.EVENTS.RESIZE, e, window.innerWidth, window.innerHeight ); }, false );
     window.addEventListener( 'mousemove', ( event ) => { this.emitter.emit('global-mousemove', event); }, false );
   }
 
