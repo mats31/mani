@@ -27,6 +27,7 @@ export default Vue.extend({
   },
 
   mounted() {
+
     this.inTl();
   },
 
@@ -88,6 +89,21 @@ export default Vue.extend({
           scaleX: 1,
           ease: Power2.easeOut,
         },
+      )
+      .fromTo(
+        this.$refs.titlecontainer,
+        0.5,
+        {
+          scaleX: 0.01,
+        },
+        {
+          scaleX: 1,
+          ease: Power2.easeOut,
+          onComplete: () => {
+            this.$refs.projects.style.opacity = 1;
+          }
+        },
+        '-=0.5'
       )
 
     },
