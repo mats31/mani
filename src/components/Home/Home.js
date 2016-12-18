@@ -19,6 +19,7 @@ export default Vue.extend({
       assets,
       assetsLoaded: false,
       contactActive: false,
+      projectActive: false,
       previews: [],
     };
   },
@@ -118,7 +119,7 @@ export default Vue.extend({
         '-=0.5'
       )
       .fromTo(
-        this.$refs.viewProjects,
+        this.$refs.right,
         0.5,
         {
           scaleX: 0.01,
@@ -127,6 +128,30 @@ export default Vue.extend({
           scaleX: 1,
           ease: Power2.easeOut,
         }
+      )
+      .fromTo(
+        this.$refs.rightContainer,
+        0.5,
+        {
+          scaleX: 0.01,
+        },
+        {
+          scaleX: 1,
+          ease: Power2.easeOut,
+        },
+        '-=0.5'
+      )
+      .fromTo(
+        this.$refs.viewProjects,
+        0.5,
+        {
+          scaleX: 0.01,
+        },
+        {
+          scaleX: 1,
+          ease: Power2.easeOut,
+        },
+        '-=0.5'
       )
       .fromTo(
         this.$refs.title,
@@ -138,6 +163,44 @@ export default Vue.extend({
         {
           x: '1px',
           scaleX: 1,
+          ease: Power2.easeOut,
+        },
+        '-=0.5'
+      )
+      .fromTo(
+        this.$refs.projects,
+        0.5,
+        {
+          x: '-100%',
+          scaleX: 0,
+        },
+        {
+          x: '-100%',
+          scaleX: 1,
+          ease: Power2.easeOut,
+        },
+        '-=0.5'
+      )
+      .fromTo(
+        this.$refs.about,
+        0.5,
+        {
+          scaleX: 0,
+        },
+        {
+          x: '-100%',
+          ease: Power2.easeOut,
+        },
+        '-=0.5'
+      )
+      .fromTo(
+        this.$refs.contact,
+        0.5,
+        {
+          scaleX: 0,
+        },
+        {
+          x: '100%',
           ease: Power2.easeOut,
         },
         '-=0.5'
@@ -160,9 +223,51 @@ export default Vue.extend({
         },
         '-=0.5'
       )
+      .to(
+        this.$refs.contact,
+        0.01,
+        {
+          scaleX: 1,
+        },
+      )
+      .to(
+        this.$refs.about,
+        0.01,
+        {
+          scaleX: 1,
+        },
+      );
     },
 
     /* EVENTS */
+    handleProjectsEnter() {
+
+      this.projectActive = true;
+
+      TweenLite.to(
+        this.$refs.projects,
+        0.3,
+        {
+          x: '0%',
+          easing: 'Power2.easeOut',
+        }
+      );
+    },
+
+    handleProjectsLeave() {
+
+      this.projectActive = true;
+
+      TweenLite.to(
+        this.$refs.projects,
+        0.3,
+        {
+          x: '-100%',
+          easing: 'Power2.easeOut',
+        }
+      );
+    },
+
     handleAboutEnter() {
 
       this.aboutActive = true;
@@ -172,6 +277,7 @@ export default Vue.extend({
         0.3,
         {
           x: '0%',
+          easing: 'Power2.easeOut',
         }
       );
     },
@@ -185,6 +291,7 @@ export default Vue.extend({
         0.3,
         {
           x: '-100%',
+          easing: 'Power2.easeOut',
         }
       );
     },
@@ -198,6 +305,7 @@ export default Vue.extend({
         0.3,
         {
           x: '-57.7%',
+          easing: 'Power2.easeOut',
         }
       );
     },
@@ -211,6 +319,7 @@ export default Vue.extend({
         0.3,
         {
           x: '100%',
+          easing: 'Power2.easeOut',
         }
       );
     },

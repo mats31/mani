@@ -4,7 +4,7 @@
 
 		<div class="home-left" ref="left">
 
-			<div class="home-viewProjects" ref="viewProjects">
+			<div class="home-viewProjects" ref="viewProjects" v-on:mouseenter="handleProjectsEnter" v-on:mouseleave="handleProjectsLeave">
 				<h2>View all the projects</h2>
 				<div class="home-projects" ref="projects">
 					<ul>

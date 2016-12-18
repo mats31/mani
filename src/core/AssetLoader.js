@@ -37,6 +37,7 @@ class AssetLoader {
         this.assetsLoaded += 1;
 
         const percent = (this.assetsLoaded / this.assetsToLoad) * 100;
+        console.log('images :', percent)
 
         this.emitter.emit(CONSTANTS.EVENTS.ASSET_LOADED, percent );
         if (percent === 100) this.emitter.emit(CONSTANTS.EVENTS.ASSETS_LOADED);
@@ -75,7 +76,7 @@ class AssetLoader {
 
         const percent = (this.assetsLoaded / this.assetsToLoad) * 100;
         this.emitter.emit(CONSTANTS.EVENTS.ASSET_LOADED, percent );
-        if (percent === 100) this.emitter.emit(CONSTANTS.EVENTS.ASSETS_LOADED);
+        if (percent === 100) this.emitter.emit(CONSTANTS.EVENTS.ASSETS_LOADED); console.log('textures :', percent);
       }, (err) => {
         console.log(err);
       });
@@ -102,16 +103,17 @@ class AssetLoader {
 
   loadVideos() {
     const videos = ressources.videos;
+    console.log('videos length:', videos.length);
 
     for ( let i = 0; i < videos.length; i += 1 ) {
 
       this.loadVideo( videos[i] ).then( ( video ) => {
         assets.videos.push( video );
         this.assetsLoaded += 1;
-
+        console.log('video !');
         const percent = (this.assetsLoaded / this.assetsToLoad) * 100;
         this.emitter.emit(CONSTANTS.EVENTS.ASSET_LOADED, percent );
-        if (percent === 100) this.emitter.emit(CONSTANTS.EVENTS.ASSETS_LOADED);
+        if (percent === 100) this.emitter.emit(CONSTANTS.EVENTS.ASSETS_LOADED); console.log('videos :', percent);
       }, (err) => {
         console.log(err);
       });
@@ -123,9 +125,28 @@ class AssetLoader {
     return new Promise( ( resolve, reject ) => {
       const video = document.createElement('video');
 
+      video.oncanplaythrough = () => {
+        resolve( { id: media.id, media: video } );
+      };
+
+      video.oncanplay = () => {
+        resolve( { id: media.id, media: video } );
+      };
+
+      video.onloadedmetadata = () => {
+        resolve( { id: media.id, media: video } );
+      };
+
       video.onloadeddata = () => {
         resolve( { id: media.id, media: video } );
       };
+
+      const interval = setInterval( () => {
+        if ( video.readyState === 4 ) {
+          clearInterval(interval);
+          resolve( { id: media.id, media: video } );
+        }
+      }, 100);
 
       video.onerror = () => {
         reject(`Une erreur est survenue lors du chargement de la video : ${video}`);
