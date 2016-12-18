@@ -93,3 +93,38 @@ html, body
   background #000000
   font-family montserrat
   font-size 62.5%
+
+.link--kukuri
+  // text-transform: uppercase;
+  // font-weight: 900;
+  overflow: hidden;
+  line-height: 0.75;
+  color: #8d8d8d;
+.link--kukuri:hover
+  color: #8d8d8d;
+.link--kukuri::after
+  content: '';
+  position: absolute;
+  height: 16px;
+  width: 100%;
+  top: 50%;
+  margin-top: -8px;
+  right: 0;
+  background: #F9F9F9;
+  transform: translate3d(-100%,0,0);
+  transition: transform 0.4s;
+  transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+  z-index 3
+.link--kukuri:hover::after
+  transform: translate3d(100%,0,0);
+.link--kukuri::before
+  content: attr(data-letters);
+  position: absolute;
+  z-index: 2;
+  overflow: hidden;
+  color: black;
+  white-space: nowrap;
+  width: 0%;
+  transition: width 0.4s 0.3s;
+.link--kukuri:hover::before
+  width: 100%;

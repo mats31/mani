@@ -19,9 +19,9 @@
 		  			</li>
 					</ul>
 				</div>
-			</div><div class="home-title">
+			</div><div class="home-title" ref="title">
 
-				<div class="home-about">
+				<div class="home-about" ref="about"  v-on:mouseleave="handleAboutLeave">
 
 					<img v-if="assetsLoaded" v-bind:src="assets.getImage('logo').media.src" v-bind:alt="assets.getImage('logo').media.alt" >
 
@@ -33,12 +33,49 @@
 
 				</div>
 
-				<h2>ABOUT ME</h2>
+				<h2 class="home__about-text" v-bind:class="{ 'is-active': aboutActive }" ref="aboutText" v-on:mouseenter="handleAboutEnter">ABOUT ME</h2>
 
-				<h1>
+				<h1 class="home__title-text">
 					IMANE BAHOUSS
 					<span>Interactive Designer Based in Paris</span>
 				</h1>
+
+			</div>
+
+		</div>
+
+    <div class="home__first-line" ref="firstLine"></div><div class="home__second-line" ref="secondLine"></div>
+
+    <div class="home__right" ref="right">
+
+			<div class="home__right-container" ref="rightContainer">
+
+				<div class="home__contact" ref="contact"  v-on:mouseleave="handleContactLeave">
+
+          <ul>
+            <li>
+              <a class="link link--kukuri" data-letters="MAIL" href="mailto:imane.bahouss@gmail.com" target="_blank">MAIL</a>
+            </li>
+            <li>
+              <a class="link link--kukuri" data-letters="BEHANCE" href="https://www.behance.net/imanbss" target="_blank">BEHANCE</a>
+            </li>
+            <li>
+              <a class="link link--kukuri" data-letters="LINKEDIN" href="https://www.linkedin.com/in/imanebahouss" target="_blank">
+                LINKEDIN
+              </a>
+            </li>
+            <li>
+              <a class="link link--kukuri" data-letters="VIMEO" href="https://vimeo.com/imanbss" target="_blank">VIMEO</a>
+            </li>
+            <li>
+              <a class="link link--kukuri" data-letters="INSTAGRAM" href="https://www.instagram.com/iman.bss/" target="_blank">INSTAGRAM</a>
+            </li>
+          </ul>
+
+				</div>
+
+				<h2 class="home__contact-text" v-bind:class="{ 'is-active': contactActive }" ref="contactText" v-on:mouseenter="handleContactEnter">Contact</h2>
+        <h2 class="home__journal" ref="journal">Journal</h2>
 
 			</div>
 

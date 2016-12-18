@@ -2,7 +2,7 @@ import assets from 'config/assets';
 import projects from 'config/projects';
 import CONSTANTS from 'config/constants';
 import Emitter from 'core/Emitter';
-import { TimelineLite } from 'gsap';
+import { TimelineLite, TweenLite } from 'gsap';
 
 import './home.styl';
 
@@ -15,8 +15,10 @@ export default Vue.extend({
   data() {
 
     return {
+      aboutActive: false,
       assets,
       assetsLoaded: false,
+      contactActive: false,
       previews: [],
     };
   },
@@ -27,7 +29,7 @@ export default Vue.extend({
   },
 
   mounted() {
-    this.inTl();
+    this.createTls();
   },
 
   methods: {
@@ -36,6 +38,7 @@ export default Vue.extend({
       this.assetsLoaded = true;
 
       this.setupProjects();
+      this.inTl.play(0);
     },
 
     setupProjects() {
@@ -63,8 +66,8 @@ export default Vue.extend({
       this.previews = previews;
     },
 
-    inTl() {
-      this.inTl = new TimelineLite();
+    createTls() {
+      this.inTl = new TimelineLite({paused: true});
 
       this.inTl
       .fromTo(
@@ -76,7 +79,43 @@ export default Vue.extend({
         {
           scaleY: 1,
           ease: Power2.easeOut,
+        }
+      )
+      .fromTo(
+        this.$refs.right,
+        0.5,
+        {
+          scaleY: 0,
         },
+        {
+          scaleY: 1,
+          ease: Power2.easeOut,
+        },
+        '-=0.5'
+      )
+      .fromTo(
+        this.$refs.firstLine,
+        0.5,
+        {
+          scaleY: 0,
+        },
+        {
+          scaleY: 1,
+          ease: Power2.easeOut,
+        },
+        '-=0.5'
+      )
+      .fromTo(
+        this.$refs.secondLine,
+        0.5,
+        {
+          scaleY: 0,
+        },
+        {
+          scaleY: 1,
+          ease: Power2.easeOut,
+        },
+        '-=0.5'
       )
       .fromTo(
         this.$refs.viewProjects,
@@ -87,9 +126,93 @@ export default Vue.extend({
         {
           scaleX: 1,
           ease: Power2.easeOut,
-        },
+        }
       )
+      .fromTo(
+        this.$refs.title,
+        0.5,
+        {
+          x: 0,
+          scaleX: 0,
+        },
+        {
+          x: '1px',
+          scaleX: 1,
+          ease: Power2.easeOut,
+        },
+        '-=0.5'
+      )
+      .to(
+        this.$refs.firstLine,
+        0.5,
+        {
+          backgroundColor: '#414141',
+          ease: Power2.easeOut,
+        },
+        '-=0.5'
+      )
+      .to(
+        this.$refs.secondLine,
+        0.5,
+        {
+          backgroundColor: '#414141',
+          ease: Power2.easeOut,
+        },
+        '-=0.5'
+      )
+    },
 
+    /* EVENTS */
+    handleAboutEnter() {
+
+      this.aboutActive = true;
+
+      TweenLite.to(
+        this.$refs.about,
+        0.3,
+        {
+          x: '0%',
+        }
+      );
+    },
+
+    handleAboutLeave() {
+
+      this.aboutActive = false;
+
+      TweenLite.to(
+        this.$refs.about,
+        0.3,
+        {
+          x: '-100%',
+        }
+      );
+    },
+
+    handleContactEnter() {
+
+      this.contactActive = true;
+
+      TweenLite.to(
+        this.$refs.contact,
+        0.3,
+        {
+          x: '-57.7%',
+        }
+      );
+    },
+
+    handleContactLeave() {
+
+      this.contactActive = false;
+
+      TweenLite.to(
+        this.$refs.contact,
+        0.3,
+        {
+          x: '100%',
+        }
+      );
     },
   },
 
