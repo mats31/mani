@@ -1,5 +1,3 @@
-
-
 import './project.styl';
 
 import template from './project.html';

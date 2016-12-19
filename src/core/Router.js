@@ -1,6 +1,9 @@
 import VueRouter from 'vue-router';
 
-import HomeContainer from '../components/Home/Home';
+import ProjectContainer from '../containers/Project/Project';
+
+import HomeComponent from '../components/Home/Home';
+import SisleyComponent from '../components/Sisley/Sisley';
 
 Vue.use( VueRouter );
 
@@ -13,9 +16,17 @@ export default class Router extends VueRouter {
       mode: 'history',
       routes: [
         {
-          component: HomeContainer,
+          component: HomeComponent,
           name: 'home',
           path: '/',
+        },
+        {
+          component: ProjectContainer,
+          name: 'project',
+          path: '/project',
+          children: [
+            { component: SisleyComponent, name: 'sisley', path: 'sisley' },
+          ],
         },
       ],
     });
