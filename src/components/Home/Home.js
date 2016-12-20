@@ -51,7 +51,6 @@ export default Vue.extend({
 
         for (let j = 0; j < images.length; j += 1) {
           if ( id === images[j].id ) {
-            console.log(images[j].media);
             const preview = {
               id: projects[i].id,
               title: projects[i].title,
@@ -63,7 +62,7 @@ export default Vue.extend({
           }
         }
       }
-
+      console.log(previews);
       this.previews = previews;
     },
 
@@ -175,7 +174,7 @@ export default Vue.extend({
           scaleX: 0,
         },
         {
-          x: '-100%',
+          x: '-101%',
           scaleX: 1,
           ease: Power2.easeOut,
         },
@@ -188,7 +187,7 @@ export default Vue.extend({
           scaleX: 0,
         },
         {
-          x: '-100%',
+          x: '-101%',
           ease: Power2.easeOut,
         },
         '-=0.5'
@@ -228,6 +227,13 @@ export default Vue.extend({
         0.01,
         {
           scaleX: 1,
+        },
+      )
+      .to(
+        this.$refs.projects,
+        0.01,
+        {
+          opacity: 1,
         },
       )
       .to(
@@ -290,7 +296,7 @@ export default Vue.extend({
         this.$refs.about,
         0.3,
         {
-          x: '-100%',
+          x: '-101%',
           easing: 'Power2.easeOut',
         }
       );

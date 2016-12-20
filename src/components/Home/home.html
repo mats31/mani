@@ -9,14 +9,14 @@
 				<div class="home-projects" ref="projects">
 					<ul>
 						<li v-for="preview in previews">
-							<router-link v-bind:to="preview.id">
+							<router-link v-bind:to="{ name: preview.id }">
 								<h2>
 									{{preview.title}}
 									<span>{{preview.subtitle}}</span>
 								</h2>
 								<img v-bind:src="preview.src" v-bind:alt="preview.title"></img>
 							</router-link>
-		  			</li>
+		  				</li>
 					</ul>
 				</div>
 			</div><div class="home-title" ref="title">
