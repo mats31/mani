@@ -126,8 +126,8 @@ const ressources = {
     { id: 'sncf35', url: 'images/projects/sncf/imanebahouss-sncf-35.gif', description: '' },
   ],
   videos: [
-    { id: 'editis', url: 'videos/editis.mp4' },
-    { id: 'editis-long', url: 'videos/editis-longue.mp4' },
+    { id: 'mathetmalice', url: 'videos/editis.mp4' },
+    { id: 'mathetmalice-long', url: 'videos/editis-longue.mp4' },
     { id: 'jeanine', url: 'videos/jeanine.mp4' },
     { id: 'jeanine-long', url: 'videos/jeanine.mp4' },
     { id: 'sisley', url: 'videos/sisley.mp4' },

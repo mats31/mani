@@ -4,6 +4,7 @@ import { TimelineLite } from 'gsap';
 
 import CONSTANTS from 'config/constants';
 import assets from 'config/assets';
+import states from 'config/states';
 
 import './canvas.styl';
 import template from './canvas.html';
@@ -37,9 +38,12 @@ export default Vue.extend({
   init() {},
 
   created() {
+    this.videoState = 'currentVideo';
     this.emitter = Emitter;
+
     this.emitter.on( CONSTANTS.EVENTS.ASSETS_LOADED, this.setup.bind(this) );
     this.emitter.on( CONSTANTS.EVENTS.RESIZE, this.onResize.bind(this) );
+    this.emitter.on( CONSTANTS.EVENTS.GO_TO_PROJECT, this.onGoToProject.bind(this) );
   },
 
   mounted() {},
@@ -60,6 +64,7 @@ export default Vue.extend({
 
         if ( assets.videos[i].id.indexOf('long') === -1 ) {
           this.shortVideos.push( assets.videos[i] );
+          console.log(this.shortVideos);
         } else {
           this.longVideos.push( assets.videos[i] );
         }
@@ -88,6 +93,9 @@ export default Vue.extend({
 
       this.nextVideo = this.shortVideos[1].media;
       this.nextVideo.onended = this.nextVideoOnEnded.bind(this);
+
+      states.currentProject = this.shortVideos[0].id;
+      this.emitter.emit(CONSTANTS.EVENTS.SLIDER_VIDEO_CHANGED);
     },
 
     // STATE --------------------------------------------
@@ -103,41 +111,55 @@ export default Vue.extend({
     // EVENTS --------------------------------------------
 
     currentVideoOnEnded() {
-      this.index = this.index === this.shortVideos.length - 1 ? 0 : this.index + 1;
-      this.stateMask = !this.stateMask;
+      if (!states.onProjectPage) {
+        this.index = this.index === this.shortVideos.length - 1 ? 0 : this.index + 1;
+        this.stateMask = !this.stateMask;
 
-      this.maskWidth = 0;
-      this.maskHeight = 0;
+        this.maskWidth = 0;
+        this.maskHeight = 0;
 
-      this.canvas.style.zIndex = 0;
-      this.canvas2.style.zIndex = 1;
+        this.canvas.style.zIndex = 0;
+        this.canvas2.style.zIndex = 1;
 
-      this.nextVideo = this.shortVideos[this.index].media;
-      this.nextVideo.play();
-      this.nextVideo.onended = this.nextVideoOnEnded.bind(this);
+        this.nextVideo = this.shortVideos[this.index].media;
+        this.nextVideo.play();
+        this.nextVideo.onended = this.nextVideoOnEnded.bind(this);
+        this.videoState = 'nextVideo';
 
-      setTimeout( this.clearCanvas.bind(this), 1500 );
+        states.currentProject = this.shortVideos[this.index].id;
+        this.emitter.emit(CONSTANTS.EVENTS.SLIDER_VIDEO_CHANGED);
 
-      // debugger;
+        this.timeout = setTimeout( this.clearCanvas.bind(this), 1500 );
+      } else {
+
+        clearTimeout(this.timeout);
+      }
     },
 
     nextVideoOnEnded() {
-      this.index = this.index === this.shortVideos.length - 1 ? 0 : this.index + 1;
-      this.stateMask = !this.stateMask;
+      if (!states.onProjectPage) {
+        this.index = this.index === this.shortVideos.length - 1 ? 0 : this.index + 1;
+        this.stateMask = !this.stateMask;
 
-      this.maskWidth = 0;
-      this.maskHeight = 0;
+        this.maskWidth = 0;
+        this.maskHeight = 0;
 
-      this.canvas2.style.zIndex = 0;
-      this.canvas.style.zIndex = 1;
+        this.canvas2.style.zIndex = 0;
+        this.canvas.style.zIndex = 1;
 
-      this.currentVideo = this.shortVideos[this.index].media;
-      this.currentVideo.play();
-      this.currentVideo.onended = this.currentVideoOnEnded.bind(this);
+        this.currentVideo = this.shortVideos[this.index].media;
+        this.currentVideo.play();
+        this.currentVideo.onended = this.currentVideoOnEnded.bind(this);
+        this.videoState = 'currentVideo';
 
-      setTimeout( this.clearCanvas.bind(this), 1500 );
+        states.currentProject = this.shortVideos[this.index].id;
+        this.emitter.emit(CONSTANTS.EVENTS.SLIDER_VIDEO_CHANGED);
 
-      // debugger;
+        this.timeout = setTimeout( this.clearCanvas.bind(this), 1500 );
+      } else {
+
+        clearTimeout(this.timeout);
+      }
     },
 
     onResize( e, width, height ) {
@@ -146,6 +168,36 @@ export default Vue.extend({
 
       this.canvas2.width = width;
       this.canvas2.height = height;
+    },
+
+    onGoToProject(id) {
+
+      let video = null;
+
+      for (let i = 0; i < this.longVideos.length; i += 1) {
+        if ( `${id}-long` === this.longVideos[i].id ) {
+          console.log(this.longVideos[i].id);
+          video = this.longVideos[i].media;
+          video.loop = true;
+        }
+      }
+
+      this.stateMask = !this.stateMask;
+
+      this.maskWidth = 0;
+      this.maskHeight = 0;
+
+      this.nextVideo = video;
+      this.currentVideo = video;
+
+
+      // if (this.videoState === 'currentVideo') {
+      // } else {
+      // }
+
+      video.play();
+
+      this.clearCanvas();
     },
 
     // UPDATE --------------------------------------------

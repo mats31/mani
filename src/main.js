@@ -27,6 +27,9 @@ class Main {
     this.emitter = Emitter;
 
     window.addEventListener( 'resize', ( e ) => { this.emitter.emit( CONSTANTS.EVENTS.RESIZE, e, window.innerWidth, window.innerHeight ); }, false );
+    window.addEventListener( 'DOMMouseScroll', ( e ) => { this.emitter.emit( CONSTANTS.EVENTS.DOM_MOUSE_SCROLL, e ); }, false );
+    window.addEventListener( 'mousewheel', ( e ) => { this.emitter.emit( CONSTANTS.EVENTS.MOUSEWHEEL, e ); }, false );
+    window.addEventListener( 'scroll', ( e ) => { this.emitter.emit( CONSTANTS.EVENTS.SCROLL, e ); }, false );
     window.addEventListener( 'mousemove', ( event ) => { this.emitter.emit('global-mousemove', event); }, false );
   }
 

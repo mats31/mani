@@ -8,14 +8,12 @@
 				<h2>View all the projects</h2>
 				<div class="home-projects" ref="projects">
 					<ul>
-						<li v-for="preview in previews">
-							<router-link v-bind:to="{ name: preview.id }">
+						<li v-for="preview in previews" v-on:click="handleProjectClick(preview.id)">
 								<h2>
 									{{preview.title}}
 									<span>{{preview.subtitle}}</span>
 								</h2>
 								<img v-bind:src="preview.src" v-bind:alt="preview.title"></img>
-							</router-link>
 		  				</li>
 					</ul>
 				</div>
@@ -43,6 +41,11 @@
 			</div>
 
 		</div>
+
+    <div class="home__project-box" ref="projectBox">
+      <h2><span ref="projectBoxTitle"></span><br /><span ref="projectBoxSubtitle"></span></h2>
+      <a ref="displayButton" v-on:click="handleButtonClick" href="#">See more</a>
+    </div>
 
     <div class="home__first-line" ref="firstLine"></div><div class="home__second-line" ref="secondLine"></div>
 
