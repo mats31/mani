@@ -165,3 +165,94 @@
           font-size 1.3rem
           line-height 3.1rem
           list-style none
+.project-footer
+  background #ffffff
+  overflow hidden
+  padding 30px 0 0 0
+  position relative
+  .project-footer__list-container
+    position relative
+  .project-footer__menu
+    margin 0 auto 30px auto
+    max-width 83.333333333333%
+    padding 0
+    width 100%
+    li
+      display inline-block
+      padding-left 1%
+      width 19%
+      span
+        cursor pointer
+        display inline-block
+        &::before
+          background #4a4a4a
+          content ''
+          display block
+          position relative
+          bottom 8px
+          height 1px
+          transition bottom 0.25s ease-out
+          width 100%
+        &:hover::before
+          bottom 0
+      &:first-child
+        width 39%
+        span::before
+          bottom 8px !important
+  .project-footer__projects
+    margin 0 auto
+    max-width 83.333333333333%
+    overflow hidden
+    padding 0
+    width 100%
+    li
+      cursor pointer
+      display inline-block
+      position relative
+      vertical-align top
+      width 50%
+      transform scale(1)
+      transition all 0.25s ease-out
+      a::before
+        background rgba(0, 0, 0, 0.5)
+        content ''
+        display block
+        height 100%
+        left 0
+        position absolute
+        top 0
+        visibility visible
+        width 100%
+        z-index 3
+        transform scale(1)
+        transition all 0.25s ease-out
+      p
+        color white
+        left 50%
+        position absolute
+        text-align center
+        top 50%
+        z-index 4
+        transform translate3D(-50%, -50%, 0)
+        span
+          color white
+          font-size 1.25rem
+          &:last-child
+            font-size 0.75rem
+      &:hover
+        transform scale(1.05)
+        z-index 1
+        a::before
+          background rgba(0, 0, 0, 0)
+          visibility hidden
+          transform scale(1.05)
+      img
+        display block
+        width 100%
+  h2
+    color #4a4a4a
+    font-family montserratsemibold
+    font-size 1.5rem
+    position absolute
+    top 50%
+    transform rotate(-90deg) translateY(-50%)

@@ -1,12 +1,12 @@
-import './project.styl';
-
+import assets from 'config/assets';
 import Emitter from 'core/Emitter';
 import CONSTANTS from 'config/constants';
-
-import states from 'config/states';
-
+// import states from 'config/states';
+import projects from 'config/projects';
 import template from './project.html';
-require( 'utils/ScrollToPlugin' );
+import './project.styl';
+require('utils/ScrollToPlugin');
+
 
 export default Vue.extend({
 
@@ -15,7 +15,8 @@ export default Vue.extend({
   data() {
 
     return {
-      // displayHome: false,
+      assets,
+      projectList: null,
     };
   },
 
@@ -28,18 +29,51 @@ export default Vue.extend({
     this.emitter = Emitter;
 
     this.emitter.emit( CONSTANTS.EVENTS.PROJECT_PAGE_CREATED );
+    this.emitter.on( CONSTANTS.EVENTS.ASSETS_LOADED, this.setup.bind(this) );
   },
 
   mounted() {
     this.createTls();
     // this.emitter = Emitter;
     // this.emitter.on('loader-end', this.displayHomepage);
+    this.emitter.on( CONSTANTS.EVENTS.ASSETS_LOADED, this.setup.bind(this) );
     this.emitter.on( CONSTANTS.EVENTS.DOM_MOUSE_SCROLL, this.handleWheel.bind(this) );
     this.emitter.on( CONSTANTS.EVENTS.MOUSEWHEEL, this.handleWheel.bind(this) );
     this.emitter.on( CONSTANTS.EVENTS.SCROLL, this.handleScroll.bind(this) );
   },
 
   methods: {
+
+    setup() {
+
+      this.getFooterProjects();
+    },
+
+    getFooterProjects() {
+
+      const images = this.assets.images;
+      const footerProjects = [];
+      const projectList = projects.projectList;
+
+      for (let i = 0; i < projectList.length; i += 1) {
+        const id = `${projectList[i].id}-footer`;
+
+        for (let j = 0; j < images.length; j += 1) {
+          if ( id === images[j].id ) {
+            const project = {
+              id: projectList[i].id,
+              title: projectList[i].title,
+              subtitle: projectList[i].subtitle,
+              src: images[j].media.src,
+            };
+
+            footerProjects.push(project);
+          }
+        }
+      }
+
+      this.projectList = footerProjects;
+    },
 
     createTls() {
       const canvasContainer = document.querySelector( '.canvas' );
@@ -125,7 +159,7 @@ export default Vue.extend({
             this.back = true;
           },
         }
-      )
+      );
       // .to(
       //   window,
       //   0.5,
@@ -204,6 +238,10 @@ export default Vue.extend({
         this.videoState = true;
         this.updateScroll( false );
       }
+    },
+
+    handleProjectClick() {
+      console.log('click !');
     },
 
     handleWheel( e ) {

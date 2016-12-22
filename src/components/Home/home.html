@@ -9,12 +9,12 @@
 				<div class="home-projects" ref="projects">
 					<ul>
 						<li v-for="preview in previews" v-on:click="handleProjectClick(preview.id)">
-								<h2>
-									{{preview.title}}
-									<span>{{preview.subtitle}}</span>
-								</h2>
-								<img v-bind:src="preview.src" v-bind:alt="preview.title"></img>
-		  				</li>
+							<h2>
+								{{preview.title}}
+								<span>{{preview.subtitle}}</span>
+							</h2>
+							<img v-bind:src="preview.src" v-bind:alt="preview.title"></img>
+	  				</li>
 					</ul>
 				</div>
 			</div><div class="home-title" ref="title">

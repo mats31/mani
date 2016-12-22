@@ -3,6 +3,7 @@ const ressources = {
     { id: 'logo', url: 'images/imanebahouss-logo-red.png', description: 'logo' },
 
     { id: 'jeanine-preview', url: 'images/projects/jeanine/imanebahouss-jeanine-preview.png', description: '' },
+    { id: 'jeanine-footer', url: 'images/projects/jeanine/imanebahouss-jeanine-footer.png', description: '' },
     { id: 'jeanine1', url: 'images/projects/jeanine/imanebahouss-jeanine-1.png', description: '' },
     { id: 'jeanine3', url: 'images/projects/jeanine/imanebahouss-jeanine-3.png', description: '' },
     { id: 'jeanine4', url: 'images/projects/jeanine/imanebahouss-jeanine-4.png', description: '' },
@@ -29,6 +30,7 @@ const ressources = {
     { id: 'jeanine25', url: 'images/projects/jeanine/imanebahouss-jeanine-25.gif', description: '' },
 
     { id: 'mathetmalice-preview', url: 'images/projects/mathetmalice/imanebahouss-mathetmalice-preview.png', description: '' },
+    { id: 'mathetmalice-footer', url: 'images/projects/mathetmalice/imanebahouss-mathetmalice-footer.png', description: '' },
     { id: 'mathetmalice1', url: 'images/projects/mathetmalice/imanebahouss-mathetmalice-1.jpg', description: '' },
     { id: 'mathetmalice3', url: 'images/projects/mathetmalice/imanebahouss-mathetmalice-3.jpg', description: '' },
     { id: 'mathetmalice4', url: 'images/projects/mathetmalice/imanebahouss-mathetmalice-4.jpg', description: '' },
@@ -59,6 +61,7 @@ const ressources = {
     { id: 'mathetmalice27', url: 'images/projects/mathetmalice/imanebahouss-mathetmalice-27.jpg', description: '' },
 
     { id: 'sisley-preview', url: 'images/projects/sisley/imanebahouss-sisley-preview.png', description: '' },
+    { id: 'sisley-footer', url: 'images/projects/sisley/imanebahouss-sisley-footer.png', description: '' },
     { id: 'sisley1', url: 'images/projects/sisley/imanebahouss-sisley-1.png', description: '' },
     { id: 'sisley3', url: 'images/projects/sisley/imanebahouss-sisley-3.png', description: '' },
     { id: 'sisley4', url: 'images/projects/sisley/imanebahouss-sisley-4.png', description: '' },
@@ -87,6 +90,7 @@ const ressources = {
     { id: 'sisley27', url: 'images/projects/sisley/imanebahouss-sisley-27.gif', description: '' },
 
     { id: 'sncf-preview', url: 'images/projects/sncf/imanebahouss-sncf-preview.png', description: '' },
+    { id: 'sncf-footer', url: 'images/projects/sncf/imanebahouss-sncf-footer.png', description: '' },
     { id: 'sncf1', url: 'images/projects/sncf/imanebahouss-sncf-1.png', description: '' },
     { id: 'sncf3', url: 'images/projects/sncf/imanebahouss-sncf-3.png', description: '' },
     { id: 'sncf4', url: 'images/projects/sncf/imanebahouss-sncf-4.png', description: '' },
