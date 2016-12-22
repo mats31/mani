@@ -44,6 +44,7 @@ export default Vue.extend({
     this.emitter.on( CONSTANTS.EVENTS.ASSETS_LOADED, this.setup.bind(this) );
     this.emitter.on( CONSTANTS.EVENTS.RESIZE, this.onResize.bind(this) );
     this.emitter.on( CONSTANTS.EVENTS.GO_TO_PROJECT, this.onGoToProject.bind(this) );
+    // this.emitter.on( CONSTANTS.EVENTS.PROJECT_PAGE_CREATED, this.onProjectPage.bind(this) );
   },
 
   mounted() {},
@@ -172,6 +173,8 @@ export default Vue.extend({
 
     onGoToProject(id) {
 
+      // clearTimeout(this.timeout);
+
       let video = null;
 
       for (let i = 0; i < this.longVideos.length; i += 1) {
@@ -182,7 +185,7 @@ export default Vue.extend({
         }
       }
 
-      this.stateMask = !this.stateMask;
+      // this.stateMask = !this.stateMask;
 
       this.maskWidth = 0;
       this.maskHeight = 0;
@@ -195,10 +198,15 @@ export default Vue.extend({
       // } else {
       // }
 
-      video.play();
+      this.nextVideo.play();
+      this.currentVideo.play();
 
       this.clearCanvas();
     },
+
+    // onProjectPage() {
+    //
+    // }
 
     // UPDATE --------------------------------------------
 

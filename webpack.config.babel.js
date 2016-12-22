@@ -19,6 +19,9 @@ export default {
       '.json',
       '.styl',
     ],
+    alias: {
+      'animation.gsap': path.resolve('src', 'utils/animation.gsap.js'),
+    },
   },
   module: {
     postLoaders: [
@@ -53,6 +56,10 @@ export default {
         test: /\.(glsl|frag|vert)$/,
         loader: 'raw-loader!glslify-loader',
         exclude: /node_modules/,
+      },
+      {
+        test: /animation.gsap\.js$/,
+        loader: 'imports?define=>false',
       },
     ],
   },

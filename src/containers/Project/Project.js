@@ -26,6 +26,8 @@ export default Vue.extend({
 
     document.body.className = 'project';
     this.emitter = Emitter;
+
+    this.emitter.emit( CONSTANTS.EVENTS.PROJECT_PAGE_CREATED );
   },
 
   mounted() {
@@ -73,7 +75,8 @@ export default Vue.extend({
         mouseText,
         0.5,
         {
-          y: '-900%',
+          // y: '-930%',
+          y: '-80px',
         },
         '-=0.5'
       )
@@ -81,7 +84,7 @@ export default Vue.extend({
         scrollBox,
         0.5,
         {
-          top: '80px',
+          top: '60px',
         },
         '-=0.5'
       )
@@ -89,7 +92,8 @@ export default Vue.extend({
         scrollBox,
         0.5,
         {
-          top: '15px',
+          top: '0px',
+          ease: Power2.easeOut,
         }
       )
       .to(
@@ -122,14 +126,14 @@ export default Vue.extend({
           },
         }
       )
-      .to(
-        window,
-        0.5,
-        {
-          scrollTo: { y: window.innerHeight * 0.5 },
-          ease: Power2.easeOut,
-        }
-      );
+      // .to(
+      //   window,
+      //   0.5,
+      //   {
+      //     scrollTo: { y: window.innerHeight * 0.5 },
+      //     ease: Power2.easeOut,
+      //   }
+      // );
 
       this.outtl
       .to(

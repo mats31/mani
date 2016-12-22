@@ -1,16 +1,19 @@
 @import '~stylesheets/common/variables'
 
 .canvas {
+  background #000000
   position: relative;
 
-  canvas{
+  canvas:first-child{
+    left: 0;
+    position: relative;
+    right: 0;
+  }
+
+  canvas:last-child{
     left: 0;
     position: absolute;
     right: 0;
   }
 
-}
-
-body.project .canvas canvas {
-  position: relative;
 }
