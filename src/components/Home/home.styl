@@ -55,6 +55,9 @@
       width 33.263888888889vw
       z-index 1
       transform translate3d(-100%,0,0)
+      html.mobile &
+        right -83.263889vw
+        width 83vw
       ul
         margin 0
         padding 0
@@ -110,6 +113,8 @@
     top 0
     width 16.666666666667vw
     transform-origin 0 0 0
+    html.mobile &
+      display none;
     .home__about-text
       color #4a4a4a
       cursor pointer
@@ -182,6 +187,8 @@
     width 50%
     z-index 0
     transform translate3d(-50%, -50%, 0)
+    html.mobile &
+      width 65%
     a
       border 1px solid #fc2d59
       color white
@@ -195,6 +202,9 @@
       text-decoration none
       width 100%
       transition background 0.25s ease-out, color 0.25s ease-out
+      html.mobile &
+        max-width 70%
+        padding 6px
       &:hover
         background rgba(255, 255, 255, 0.5)
         color #fc2d59
@@ -207,10 +217,14 @@
         font-family montserratextrabold
         font-size 5.4rem
         transform translate3d(0%, 0%, 0)
+        html.mobile &
+          font-size 2.4rem
       span:last-child
         font-family montserratultralight
         font-size 4rem
         transform translate3d(0%, 0%, 0)
+        html.mobile &
+          font-size 2rem
   .home__first-line
     background #ffffff
     left 41.597222222222%
@@ -236,6 +250,8 @@
     width 24.93055556vw
     z-index 1
     transform-origin 66.7296786389% 0 0
+    html.mobile &
+      background inherit
     &:after
       border-left: 1px solid #505050;
       content ''
@@ -253,6 +269,8 @@
       height 100%
       width: 16.597222222222vw
       transform-origin 0 0 0
+      html.mobile &
+        display none;
       .home__contact-text
         color #4a4a4a
         cursor pointer

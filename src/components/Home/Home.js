@@ -463,7 +463,7 @@ export default Vue.extend({
 
       this.inTl.reverse(0);
       states.onProjectPage = true;
-      this.emitter.emit( CONSTANTS.EVENTS.GO_TO_PROJECT, states.currentProject );
+      // this.emitter.emit( CONSTANTS.EVENTS.GO_TO_PROJECT, states.currentProject );
 
       setTimeout( () => {
 
@@ -475,7 +475,7 @@ export default Vue.extend({
 
       this.inTl.reverse(0);
       states.onProjectPage = true;
-      this.emitter.emit( CONSTANTS.EVENTS.GO_TO_PROJECT, id);
+      // this.emitter.emit( CONSTANTS.EVENTS.GO_TO_PROJECT, id);
 
       setTimeout( () => {
 
@@ -483,32 +483,65 @@ export default Vue.extend({
       }, 1500);
     },
 
+    handleProjectsClick() {
+
+      if (this.projectActive) {
+        TweenLite.to(
+          this.$refs.projects,
+          0.3,
+          {
+            x: '-100%',
+            ease: 'Power2.easeOut',
+            onComplete: () => {
+              this.projectActive = false;
+            },
+          }
+        );
+      } else {
+        TweenLite.to(
+          this.$refs.projects,
+          0.3,
+          {
+            x: '0%',
+            ease: 'Power2.easeOut',
+            onComplete: () => {
+              this.projectActive = true;
+            },
+          }
+        );
+      }
+    },
+
     handleProjectsEnter() {
 
-      this.projectActive = true;
+      if (!states.isMobile) {
+        this.projectActive = true;
 
-      TweenLite.to(
-        this.$refs.projects,
-        0.3,
-        {
-          x: '0%',
-          ease: 'Power2.easeOut',
-        }
-      );
+        TweenLite.to(
+          this.$refs.projects,
+          0.3,
+          {
+            x: '0%',
+            ease: 'Power2.easeOut',
+          }
+        );
+      }
     },
 
     handleProjectsLeave() {
 
-      this.projectActive = true;
+      if (!states.isMobile) {
+        this.projectActive = false;
 
-      TweenLite.to(
-        this.$refs.projects,
-        0.3,
-        {
-          x: '-100%',
-          ease: 'Power2.easeOut',
-        }
-      );
+        TweenLite.to(
+          this.$refs.projects,
+          0.3,
+          {
+            x: '-100%',
+            ease: 'Power2.easeOut',
+          }
+        );
+      }
     },
 
     handleAboutEnter() {

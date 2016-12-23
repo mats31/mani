@@ -53,7 +53,7 @@
         <li><span>JOURNAL</span></li>
       </ul>
       <ul class="project-footer__projects">
-        <li v-for="project in projectList" v-on:click="handleProjectClick(preview.id)">
+        <li v-for="project in projectList" v-on:click="handleProjectClick(project.id)">
           <a>
             <img v-bind:src="project.src" v-bind:alt="project.title"></img>
             <p>

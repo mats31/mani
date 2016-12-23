@@ -1,7 +1,7 @@
 import assets from 'config/assets';
 import Emitter from 'core/Emitter';
 import CONSTANTS from 'config/constants';
-// import states from 'config/states';
+import states from 'config/states';
 import projects from 'config/projects';
 import template from './project.html';
 import './project.styl';
@@ -22,6 +22,8 @@ export default Vue.extend({
 
   created() {
 
+    // console.log(this.$router.currentRoute.name);
+
     this.back = false;
     this.videoState = true;
 
@@ -30,12 +32,18 @@ export default Vue.extend({
     this.getFooterProjects();
 
     this.emitter.emit( CONSTANTS.EVENTS.PROJECT_PAGE_CREATED );
-    this.emitter.on( CONSTANTS.EVENTS.ASSETS_LOADED, this.setup.bind(this) );
+
+    if (states.assetsLoaded) {
+      this.emitter.emit( CONSTANTS.EVENTS.GO_TO_PROJECT, this.$router.currentRoute.name );
+    } else {
+      this.emitter.on( CONSTANTS.EVENTS.ASSETS_LOADED, this.setup.bind(this) );
+    }
   },
 
   mounted() {
 
     // this.checkScroll();
+    this.setProjectTitle(this.$router.currentRoute.name);
     this.createTls();
     // this.emitter = Emitter;
     // this.emitter.on('loader-end', this.displayHomepage);
@@ -43,12 +51,29 @@ export default Vue.extend({
     this.emitter.on( CONSTANTS.EVENTS.DOM_MOUSE_SCROLL, this.handleWheel.bind(this) );
     this.emitter.on( CONSTANTS.EVENTS.MOUSEWHEEL, this.handleWheel.bind(this) );
     this.emitter.on( CONSTANTS.EVENTS.SCROLL, this.handleScroll.bind(this) );
+
+    if (states.isMobile) {
+      TweenLite.to(
+        this.$refs.projectContainer,
+        1,
+        {
+          opacity: 1,
+          ease: Power2.easeOut,
+        }
+      );
+    }
   },
 
   methods: {
 
+    setProjectTitle(id) {
+      const title = projects.getProject(id).title;
+      this.$refs.title.innerHTML = title;
+    },
+
     setup() {
 
+      this.emitter.emit( CONSTANTS.EVENTS.GO_TO_PROJECT, this.$router.currentRoute.name );
       this.getFooterProjects();
       this.checkScroll();
     },
@@ -269,8 +294,18 @@ export default Vue.extend({
       }
     },
 
-    handleProjectClick() {
-      console.log('click !');
+    handleProjectClick(id) {
+
+      // this.inTl.reverse(0);
+      // states.onProjectPage = true;
+      // this.emitter.emit( CONSTANTS.EVENTS.GO_TO_PROJECT, id);
+
+      // setTimeout( () => {
+
+      this.setProjectTitle(id);
+      this.emitter.emit( CONSTANTS.EVENTS.GO_TO_PROJECT, id );
+      this.$router.push({ name: id });
+      // }, 1500);
     },
 
     handleWheel( e ) {

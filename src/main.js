@@ -6,6 +6,8 @@ import AssetLoader from 'core/AssetLoader';
 import Emitter from 'core/Emitter';
 import Router from 'core/Router';
 import CONSTANTS from 'config/constants';
+import states from 'config/states';
+import MobileDetect from 'mobile-detect';
 import './stylesheets/main.styl';
 
 class Main {
@@ -14,9 +16,20 @@ class Main {
 
     this.router = new Router();
 
+    this.setup();
     this.setEvents();
     this.loadAssets();
     this.start();
+  }
+
+  setup() {
+    this.md = new MobileDetect(window.navigator.userAgent);
+    if (this.md.mobile()) {
+      const html = document.getElementsByTagName( 'html' )[0];
+      html.className += ' mobile';
+
+      states.isMobile = true;
+    }
   }
 
   loadAssets() {
