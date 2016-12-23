@@ -13,9 +13,7 @@ export default Vue.extend({
     return {};
   },
 
-  mounted() {
-    console.log(this);
-  },
+  mounted() {},
 
   methods: {},
 

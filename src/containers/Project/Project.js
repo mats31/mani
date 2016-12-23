@@ -177,9 +177,13 @@ export default Vue.extend({
           ease: Power2.easeOut,
         }
       )
-      .to(
+      .fromTo(
         canvasContainer,
         0.5,
+        {
+          scale: 1,
+          ease: Power2.easeOut,
+        },
         {
           scale: 0.834,
           zIndex: 2,
@@ -282,6 +286,7 @@ export default Vue.extend({
       if ( bool ) {
         this.intl.restart();
       } else {
+        console.log('nike ta mere');
         this.outtl.restart();
       }
     },
@@ -301,6 +306,31 @@ export default Vue.extend({
     handleLogoClick() {
       this.outtl.restart();
       setTimeout( () => {
+        window.scrollY = 0;
+        this.goToHome();
+      }, 1500);
+    },
+
+    handleAboutClick() {
+      this.outtl.restart();
+      setTimeout( () => {
+        window.scrollY = 0;
+        this.goToHome();
+      }, 1500);
+    },
+
+    handleContactClick() {
+      this.outtl.restart();
+      setTimeout( () => {
+        window.scrollY = 0;
+        this.goToHome();
+      }, 1500);
+    },
+
+    handleJournalClick() {
+      this.outtl.restart();
+      setTimeout( () => {
+        window.scrollY = 0;
         this.goToHome();
       }, 1500);
     },

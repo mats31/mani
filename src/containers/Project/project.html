@@ -48,9 +48,9 @@
     <div class="project-footer__list-container">
       <ul class="project-footer__menu">
         <li><span>VIEW ALL THE PROJECTS</span></li>
-        <li><span>ABOUT ME</span></li>
-        <li><span>CONTACT</span></li>
-        <li><span>JOURNAL</span></li>
+        <li v-on:click="handleAboutClick()"><span>ABOUT ME</span></li>
+        <li v-on:click="handleContactClick()"><span>CONTACT</span></li>
+        <li v-on:click="handleJournalClick()"><span>JOURNAL</span></li>
       </ul>
       <ul class="project-footer__projects">
         <li v-for="project in projectList" v-on:click="handleProjectClick(project.id)">

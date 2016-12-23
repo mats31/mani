@@ -46,7 +46,6 @@ export default Vue.extend({
     this.emitter.on( CONSTANTS.EVENTS.GO_TO_PROJECT, this.onGoToProject.bind(this) );
     this.emitter.on( CONSTANTS.EVENTS.GO_BACK_HOME, () => {
       this.startLoopVideo();
-      this.stateMask = !this.stateMask;
     });
   },
 
@@ -68,7 +67,6 @@ export default Vue.extend({
 
         if ( assets.videos[i].id.indexOf('long') === -1 ) {
           this.shortVideos.push( assets.videos[i] );
-          console.log(this.shortVideos);
         } else {
           this.longVideos.push( assets.videos[i] );
         }
@@ -97,6 +95,15 @@ export default Vue.extend({
     // STATE --------------------------------------------
 
     startLoopVideo() {
+
+      this.stateMask = false;
+
+      this.maskWidth = 0;
+      this.maskHeight = 0;
+
+      this.canvas2.style.zIndex = 0;
+      this.canvas.style.zIndex = 1;
+
       this.currentVideo = this.shortVideos[0].media;
       this.currentVideo.onended = this.currentVideoOnEnded.bind(this);
       this.currentVideo.play();
@@ -171,6 +178,7 @@ export default Vue.extend({
     },
 
     onResize( e, width, height ) {
+      console.log(this);
       this.canvas.width = width;
       this.canvas.height = height;
 
@@ -186,7 +194,6 @@ export default Vue.extend({
 
       for (let i = 0; i < this.longVideos.length; i += 1) {
         if ( `${id}-long` === this.longVideos[i].id ) {
-          console.log(this.longVideos[i].id);
           video = this.longVideos[i].media;
           video.loop = true;
         }

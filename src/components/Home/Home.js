@@ -35,21 +35,21 @@ export default Vue.extend({
 
     this.emitter = Emitter;
     this.emitter.on( CONSTANTS.EVENTS.ASSETS_LOADED, this.setup.bind(this) );
+    this.emitter.on( CONSTANTS.EVENTS.SLIDER_VIDEO_CHANGED, this.onSliderVideoChanged );
   },
 
   mounted() {
-    this.emitter.on( CONSTANTS.EVENTS.SLIDER_VIDEO_CHANGED, this.onSliderVideoChanged.bind(this) );
-    console.log(345);
-    console.log(this);
-    console.log(this.$refs);
-    console.log(this.$refs.projectBoxTitle);
-
     this.createTls();
     if (states.assetsLoaded) {
+      states.onProjectPage = false;
       this.assetsLoaded = true;
       this.setup();
       this.emitter.emit( CONSTANTS.EVENTS.GO_BACK_HOME);
     }
+  },
+
+  destroyed() {
+    this.emitter.off(CONSTANTS.EVENTS.SLIDER_VIDEO_CHANGED, this.onSliderVideoChanged);
   },
 
   methods: {
@@ -616,10 +616,6 @@ export default Vue.extend({
         const project = projects.getProject(states.currentProject);
 
         if (this.introAnimateComplete) {
-          console.log(678);
-          console.log(this);
-          console.log(this.$refs);
-          console.log(this.$refs.projectBoxTitle);
           TweenMax.to(
             this.$refs.projectBox,
             0.3,
