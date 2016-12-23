@@ -12,6 +12,8 @@ import template from './home.html';
 
 export default Vue.extend({
 
+  name: 'home',
+
 
   template,
 
@@ -33,13 +35,21 @@ export default Vue.extend({
 
     this.emitter = Emitter;
     this.emitter.on( CONSTANTS.EVENTS.ASSETS_LOADED, this.setup.bind(this) );
-    this.emitter.on( CONSTANTS.EVENTS.SLIDER_VIDEO_CHANGED, this.onSliderVideoChanged.bind(this) );
   },
 
   mounted() {
+    this.emitter.on( CONSTANTS.EVENTS.SLIDER_VIDEO_CHANGED, this.onSliderVideoChanged.bind(this) );
+    console.log(345);
+    console.log(this);
+    console.log(this.$refs);
+    console.log(this.$refs.projectBoxTitle);
 
     this.createTls();
-    if (states.assetsLoaded) this.setup();
+    if (states.assetsLoaded) {
+      this.assetsLoaded = true;
+      this.setup();
+      this.emitter.emit( CONSTANTS.EVENTS.GO_BACK_HOME);
+    }
   },
 
   methods: {
@@ -602,39 +612,44 @@ export default Vue.extend({
 
     /* EVENTS */
     onSliderVideoChanged() {
-      const project = projects.getProject(states.currentProject);
+      Vue.nextTick( () => {
+        const project = projects.getProject(states.currentProject);
 
-      if (this.introAnimateComplete) {
+        if (this.introAnimateComplete) {
+          console.log(678);
+          console.log(this);
+          console.log(this.$refs);
+          console.log(this.$refs.projectBoxTitle);
+          TweenMax.to(
+            this.$refs.projectBox,
+            0.3,
+            {
+              y: '-52%',
+              opacity: 0,
+              ease: 'Power3.easeOut',
+              onComplete: () => {
+                this.$refs.projectBoxTitle.innerHTML = project.title;
+                this.$refs.projectBoxSubtitle.innerHTML = project.subtitle;
+              },
+            }
+          );
 
-        TweenMax.to(
-          this.$refs.projectBox,
-          0.3,
-          {
-            y: '-52%',
-            opacity: 0,
-            ease: 'Power3.easeOut',
-            onComplete: () => {
-              this.$refs.projectBoxTitle.innerHTML = project.title;
-              this.$refs.projectBoxSubtitle.innerHTML = project.subtitle;
-            },
-          }
-        );
+          TweenMax.to(
+            this.$refs.projectBox,
+            0.3,
+            {
+              delay: 0.3,
+              y: '-50%',
+              opacity: 1,
+              ease: 'Power3.easeOut',
+            }
+          );
+        } else {
 
-        TweenMax.to(
-          this.$refs.projectBox,
-          0.3,
-          {
-            delay: 0.3,
-            y: '-50%',
-            opacity: 1,
-            ease: 'Power3.easeOut',
-          }
-        );
-      } else {
-
-        this.$refs.projectBoxTitle.innerHTML = project.title;
-        this.$refs.projectBoxSubtitle.innerHTML = project.subtitle;
-      }
+          this.$refs.projectBoxTitle.innerHTML = project.title;
+          this.$refs.projectBoxSubtitle.innerHTML = project.subtitle;
+        }
+      });
     },
   },
 

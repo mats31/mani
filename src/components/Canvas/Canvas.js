@@ -44,7 +44,10 @@ export default Vue.extend({
     this.emitter.on( CONSTANTS.EVENTS.ASSETS_LOADED, this.setup.bind(this) );
     this.emitter.on( CONSTANTS.EVENTS.RESIZE, this.onResize.bind(this) );
     this.emitter.on( CONSTANTS.EVENTS.GO_TO_PROJECT, this.onGoToProject.bind(this) );
-    // this.emitter.on( CONSTANTS.EVENTS.PROJECT_PAGE_CREATED, this.onProjectPage.bind(this) );
+    this.emitter.on( CONSTANTS.EVENTS.GO_BACK_HOME, () => {
+      this.startLoopVideo();
+      this.stateMask = !this.stateMask;
+    });
   },
 
   mounted() {},
@@ -88,6 +91,12 @@ export default Vue.extend({
       this.$refs.container.appendChild(this.canvas);
       this.$refs.container.appendChild(this.canvas2);
 
+      this.startLoopVideo();
+    },
+
+    // STATE --------------------------------------------
+
+    startLoopVideo() {
       this.currentVideo = this.shortVideos[0].media;
       this.currentVideo.onended = this.currentVideoOnEnded.bind(this);
       this.currentVideo.play();
@@ -98,8 +107,6 @@ export default Vue.extend({
       states.currentProject = this.shortVideos[0].id;
       this.emitter.emit(CONSTANTS.EVENTS.SLIDER_VIDEO_CHANGED);
     },
-
-    // STATE --------------------------------------------
 
     clearCanvas() {
       if ( !this.stateMask ) {

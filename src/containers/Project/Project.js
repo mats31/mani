@@ -286,12 +286,23 @@ export default Vue.extend({
       }
     },
 
+    goToHome() {
+      this.$router.push({ name: 'home' });
+    },
+
     /* HANDLE */
     handleScroll() {
       if ( !this.videoState && window.scrollY < 1 ) {
         this.videoState = true;
         this.updateScroll( false );
       }
+    },
+
+    handleLogoClick() {
+      this.outtl.restart();
+      setTimeout( () => {
+        this.goToHome();
+      }, 1500);
     },
 
     handleProjectClick(id) {
