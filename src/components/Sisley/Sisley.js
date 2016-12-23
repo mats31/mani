@@ -40,22 +40,22 @@ export default Vue.extend({
   methods: {
 
     generateTimelineMax() {
-      const grids = this.$refs.grids.querySelectorAll( 'div' );
+      // const grids = this.$refs.grids.querySelectorAll( 'div' );
       const descriptions = this.$refs.description.querySelectorAll( 'div' );
 
       this.inTl = new TimelineMax({ paused: true });
 
       this.inTl
-      .staggerFromTo(
-        grids,
-        5,
-        {
-          height: '0%',
-        },
-        {
-          height: '100%',
-        }
-      )
+      // .staggerFromTo(
+      //   grids,
+      //   5,
+      //   {
+      //     height: '0%',
+      //   },
+      //   {
+      //     height: '100%',
+      //   }
+      // )
       .fromTo(
         descriptions,
         1,

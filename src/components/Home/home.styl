@@ -10,6 +10,7 @@
     height 100vh
     position relative
     width 24.93055556vw
+    z-index 1
     transform-origin 0 0 0
   .home-viewProjects
     border-right 1px solid white
@@ -21,12 +22,13 @@
     transform-origin 100% 0 0
     &::before
       background rgba(255,255,255,1)
+      border-right: 1px solid #505050;
       content ''
       display block
       height 100%
       position absolute
       width 100%
-      z-index 1
+      z-index 2
     h2
       margin 0
       font-size 1.5rem
@@ -51,6 +53,7 @@
       position absolute
       right -33.263888888889vw
       width 33.263888888889vw
+      z-index 1
       transform translate3d(-100%,0,0)
       ul
         margin 0
@@ -58,6 +61,7 @@
         li
           cursor pointer
           position relative
+          overflow hidden
           width 100%
           &::before
             background rgba(0,0,0,0.5)
@@ -84,6 +88,7 @@
               display block
               font-size 0.75rem
           img
+            vertical-align top
             width 100%
             transform scale(1)
             transition transform 0.2s ease-in-out
@@ -98,7 +103,7 @@
               transform scale(1.1)
   .home-title
     background #ffffff
-    border-left: 1px solid #505050;
+    // border-left: 1px solid #505050;
     height 100%
     left 8.263888888889vw
     position absolute
@@ -229,9 +234,22 @@
     position absolute
     top 0
     width 24.93055556vw
+    z-index 1
     transform-origin 66.7296786389% 0 0
+    &:after
+      border-left: 1px solid #505050;
+      content ''
+      display block
+      position absolute
+      background white
+      height 100vh
+      // right -8.4vw
+      right -1px
+      top 0
+      width 8.263888888889vw
+      z-index 10
     .home__right-container
-      border-right: 1px solid #505050;
+      // border-right: 1px solid #505050;
       height 100%
       width: 16.597222222222vw
       transform-origin 0 0 0
@@ -283,8 +301,9 @@
         height 100%
         position absolute
         top: 0
+        right: 0
         width 33.263888888889vw
-        transform translate3d(100%, 0, 0)
+        // transform translate3d(0%, 0, 0)
         // z-index 10
         ul
           left 13.25%
@@ -309,9 +328,9 @@
             &:last-child
               margin-bottom 0
         @media screen and (max-width: 1070px)
-          left 10%
-          li a
+          // left 10%
+          ul li a
             font-size 3.4rem
         @media screen and (max-width: 720px)
-          li a
+          ul li a
             font-size 3rem

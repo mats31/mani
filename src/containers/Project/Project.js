@@ -25,14 +25,17 @@ export default Vue.extend({
     this.back = false;
     this.videoState = true;
 
-    document.body.className = 'project';
     this.emitter = Emitter;
+
+    this.getFooterProjects();
 
     this.emitter.emit( CONSTANTS.EVENTS.PROJECT_PAGE_CREATED );
     this.emitter.on( CONSTANTS.EVENTS.ASSETS_LOADED, this.setup.bind(this) );
   },
 
   mounted() {
+
+    // this.checkScroll();
     this.createTls();
     // this.emitter = Emitter;
     // this.emitter.on('loader-end', this.displayHomepage);
@@ -47,6 +50,7 @@ export default Vue.extend({
     setup() {
 
       this.getFooterProjects();
+      this.checkScroll();
     },
 
     getFooterProjects() {
@@ -75,9 +79,27 @@ export default Vue.extend({
       this.projectList = footerProjects;
     },
 
+    checkScroll() {
+      setTimeout( () => {
+        if (window.scrollY > 0) {
+          this.intl.restart();
+          this.videoState = false;
+          TweenLite.to(
+            this.$refs.projectContainer,
+            1,
+            {
+              opacity: 1,
+              ease: Power2.easeOut,
+            }
+          );
+          document.body.className = 'project';
+        }
+      });
+    },
+
     createTls() {
       const canvasContainer = document.querySelector( '.canvas' );
-      const grid = this.$refs.projectContainer.querySelector( '.project-content .grid' );
+      const grid = this.$refs.grids.getElementsByTagName( 'div' );
       const header = this.$refs.header;
       const scrollBox = this.$refs.scrollBox;
 
@@ -110,7 +132,7 @@ export default Vue.extend({
         0.5,
         {
           // y: '-930%',
-          y: '-80px',
+          y: '-90px',
         },
         '-=0.5'
       )
@@ -126,7 +148,7 @@ export default Vue.extend({
         scrollBox,
         0.5,
         {
-          top: '0px',
+          top: '-60px',
           ease: Power2.easeOut,
         }
       )
@@ -135,7 +157,7 @@ export default Vue.extend({
         0.5,
         {
           scale: 0.834,
-          zIndex: 1,
+          zIndex: 2,
           ease: Power2.easeOut,
         },
         '-=0.5'
@@ -153,9 +175,16 @@ export default Vue.extend({
         grid,
         0.5,
         {
-          top: '-115vh',
+          top: '0',
           onComplete: () => {
-            document.body.className = '';
+            TweenLite.to(
+              this.$refs.projectContainer,
+              0.15,
+              {
+                opacity: 1,
+              }
+            );
+            document.body.className = 'project';
             this.back = true;
           },
         }
@@ -195,7 +224,7 @@ export default Vue.extend({
         0.5,
         {
           scale: 1,
-          zIndex: 0,
+          zIndex: 2,
           ease: Power2.easeOut,
           onComplete: () => {
             mouse.className = '';
@@ -217,7 +246,7 @@ export default Vue.extend({
         {
           background: 'none',
           onComplete: () => {
-            document.body.className = 'project';
+            document.body.className = '';
             this.back = false;
           },
         }

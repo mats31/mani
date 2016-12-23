@@ -4,9 +4,9 @@ import Emitter from 'core/Emitter';
 import ScrollMagic from 'scrollmagic';
 require('animation.gsap');
 
-import './jeanine.styl';
+import './sncf.styl';
 
-import template from './jeanine.html';
+import template from './sncf.html';
 
 export default Vue.extend({
 
@@ -42,7 +42,7 @@ export default Vue.extend({
       this.inTl
       // .staggerFromTo(
       //   grids,
-      //   2,
+      //   5,
       //   {
       //     height: '0%',
       //   },
@@ -128,7 +128,43 @@ export default Vue.extend({
       })
       .setTween( tween4 )
       .reverse( false )
-  		.addTo( this.controller );
+    	.addTo( this.controller );
+
+
+      /* Section 7 */
+      const tween7 = new TimelineMax();
+      tween7
+      .fromTo(
+        this.$refs.section7.querySelector( 'img:nth-child(1)' ),
+        0.5,
+        {
+          opacity: 0,
+          x: -200,
+        },
+        {
+          opacity: 1,
+          x: 0,
+          ease: SlowMo.easeOut,
+        }
+      )
+      .fromTo(
+        this.$refs.section7.querySelector( 'img:nth-child(2)' ),
+        0.5,
+        {
+          opacity: 0,
+          x: 200,
+        },
+        {
+          opacity: 1,
+          x: 0,
+          ease: SlowMo.easeOut,
+        }
+      );
+
+      const scene7 = new ScrollMagic.Scene({ triggerElement: '.section-7' })
+      .setTween( tween7 )
+      .reverse( false )
+    	.addTo( this.controller );
     },
 
     setSectionSize() {

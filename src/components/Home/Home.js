@@ -137,7 +137,7 @@ export default Vue.extend({
         this.$refs.right,
         0.5,
         {
-          scaleX: 0.01,
+          scaleX: 0.001,
         },
         {
           scaleX: 1,
@@ -160,9 +160,11 @@ export default Vue.extend({
         this.$refs.viewProjects,
         0.5,
         {
+          borderColor: '#fff',
           scaleX: 0.01,
         },
         {
+          borderColor: '#505050',
           scaleX: 1,
           ease: Power2.easeOut,
         },
@@ -490,7 +492,7 @@ export default Vue.extend({
         0.3,
         {
           x: '0%',
-          easing: 'Power2.easeOut',
+          ease: 'Power2.easeOut',
         }
       );
     },
@@ -504,7 +506,7 @@ export default Vue.extend({
         0.3,
         {
           x: '-100%',
-          easing: 'Power2.easeOut',
+          ease: 'Power2.easeOut',
         }
       );
     },
@@ -518,7 +520,7 @@ export default Vue.extend({
         0.3,
         {
           x: '0%',
-          easing: 'Power2.easeOut',
+          ease: 'Power2.easeOut',
         }
       );
     },
@@ -532,7 +534,7 @@ export default Vue.extend({
         0.3,
         {
           x: '-101%',
-          easing: 'Power2.easeOut',
+          ease: 'Power2.easeOut',
         }
       );
     },
@@ -545,8 +547,8 @@ export default Vue.extend({
         this.$refs.contact,
         0.3,
         {
-          x: '-57.7%',
-          easing: 'Power2.easeOut',
+          x: '0%',
+          ease: 'Power2.easeOut',
         }
       );
     },
@@ -560,7 +562,7 @@ export default Vue.extend({
         0.3,
         {
           x: '100%',
-          easing: 'Power2.easeOut',
+          ease: 'Power2.easeOut',
         }
       );
     },

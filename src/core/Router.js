@@ -5,6 +5,8 @@ import ProjectContainer from '../containers/Project/Project';
 import HomeComponent from '../components/Home/Home';
 import SisleyComponent from '../components/Sisley/Sisley';
 import JeanineComponent from '../components/Jeanine/Jeanine';
+import MathetmaliceComponent from '../components/Mathetmalice/Mathetmalice';
+import SncfComponent from '../components/Sncf/Sncf';
 
 Vue.use( VueRouter );
 
@@ -28,6 +30,8 @@ export default class Router extends VueRouter {
           children: [
             { component: SisleyComponent, name: 'sisley', path: 'sisley' },
             { component: JeanineComponent, name: 'jeanine', path: 'jeanine' },
+            { component: MathetmaliceComponent, name: 'mathetmalice', path: 'mathetmalice' },
+            { component: SncfComponent, name: 'sncf', path: 'sncf' },
           ],
         },
       ],
