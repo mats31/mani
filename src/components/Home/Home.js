@@ -620,6 +620,7 @@ export default Vue.extend({
             this.$refs.projectBox,
             0.3,
             {
+              x: '-50%',
               y: '-52%',
               opacity: 0,
               ease: 'Power3.easeOut',
@@ -634,6 +635,7 @@ export default Vue.extend({
             this.$refs.projectBox,
             0.3,
             {
+              x: '-50%',
               delay: 0.3,
               y: '-50%',
               opacity: 1,

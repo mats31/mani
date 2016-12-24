@@ -178,7 +178,6 @@ export default Vue.extend({
     },
 
     onResize( e, width, height ) {
-      console.log(this);
       this.canvas.width = width;
       this.canvas.height = height;
 
@@ -235,18 +234,28 @@ export default Vue.extend({
 
       if ( !this.stateMask ) {
 
+        const hRatio = canvas.width / currentVideo.videoWidth;
+        const vRatio = canvas.height / currentVideo.videoHeight;
+        const ratio = Math.min( hRatio, vRatio );
+
         this.ctx.save();
         this.drawMask( this.ctx );
         this.ctx.globalCompositeOperation = 'source-in';
         this.ctx.drawImage( currentVideo, 0, 0, currentVideo.videoWidth, currentVideo.videoHeight, 0, 0, canvas.width, canvas.height );
+        // this.ctx.drawImage(currentVideo, 0, 0, currentVideo.videoWidth, currentVideo.videoHeight, 0, 0, canvas.width * ratio, canvas.height * ratio);
         this.ctx.restore();
 
       } else {
+
+        const hRatio = canvas.width / currentVideo.videoWidth;
+        const vRatio = canvas.height / currentVideo.videoHeight;
+        const ratio = Math.min( hRatio, vRatio );
 
         this.ctx2.save();
         this.drawMask( this.ctx2 );
         this.ctx2.globalCompositeOperation = 'source-in';
         this.ctx2.drawImage( nextVideo, 0, 0, nextVideo.videoWidth, nextVideo.videoHeight, 0, 0, canvas2.width, canvas2.height );
+        // this.ctx2.drawImage( nextVideo, 0, 0, nextVideo.videoWidth, nextVideo.videoHeight, 0, 0, canvas2.width * ratio, canvas2.height * ratio );
         this.ctx2.restore();
 
       }

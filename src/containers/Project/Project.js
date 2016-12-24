@@ -286,7 +286,6 @@ export default Vue.extend({
       if ( bool ) {
         this.intl.restart();
       } else {
-        console.log('nike ta mere');
         this.outtl.restart();
       }
     },
