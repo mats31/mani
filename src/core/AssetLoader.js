@@ -37,7 +37,7 @@ class AssetLoader {
         this.assetsLoaded += 1;
 
         const percent = (this.assetsLoaded / this.assetsToLoad) * 100;
-
+        console.log('images', percent);
         this.emitter.emit(CONSTANTS.EVENTS.ASSET_LOADED, percent );
         if (percent === 100) this.emitter.emit(CONSTANTS.EVENTS.ASSETS_LOADED);
       }, (err) => {
@@ -74,6 +74,7 @@ class AssetLoader {
         this.assetsLoaded += 1;
 
         const percent = (this.assetsLoaded / this.assetsToLoad) * 100;
+        console.log('textures', percent);
         this.emitter.emit(CONSTANTS.EVENTS.ASSET_LOADED, percent );
         if (percent === 100) this.emitter.emit(CONSTANTS.EVENTS.ASSETS_LOADED);
       }, (err) => {
@@ -109,6 +110,7 @@ class AssetLoader {
         assets.videos.push( video );
         this.assetsLoaded += 1;
         const percent = (this.assetsLoaded / this.assetsToLoad) * 100;
+        console.log('videos', percent);
         this.emitter.emit(CONSTANTS.EVENTS.ASSET_LOADED, percent );
         if (percent === 100) this.emitter.emit(CONSTANTS.EVENTS.ASSETS_LOADED);
       }, (err) => {

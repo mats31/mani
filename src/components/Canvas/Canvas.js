@@ -41,6 +41,7 @@ export default Vue.extend({
     this.videoState = 'currentVideo';
     this.emitter = Emitter;
 
+    console.log('events canvas');
     this.emitter.on( CONSTANTS.EVENTS.ASSETS_LOADED, this.setup.bind(this) );
     this.emitter.on( CONSTANTS.EVENTS.RESIZE, this.onResize.bind(this) );
     this.emitter.on( CONSTANTS.EVENTS.GO_TO_PROJECT, this.onGoToProject.bind(this) );
@@ -54,6 +55,7 @@ export default Vue.extend({
   methods: {
 
     setup() {
+      console.log('setup canvas');
       this.getVideos();
       this.createCanvas();
 
